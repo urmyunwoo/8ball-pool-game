@@ -46,10 +46,10 @@ function drawTableToCache() {
     }
     ctx.globalAlpha = 1.0;
 
-    // Cushions (실제 당구대 느낌 - 진한 녹색 + 고무 하이라이트)
+    // Cushions - 펠트와 자연스럽게 이어지는 쿠션
     const cPad = POCKET_RADIUS + 10;
     const halfW = TABLE_W / 2 - POCKET_RADIUS * 2 - 10;
-    ctx.fillStyle = '#0a4a10';
+    ctx.fillStyle = C_FELT_DARK;
     // top
     ctx.fillRect(TABLE_X + cPad, TABLE_Y, halfW, CUSHION_SIZE);
     ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y, halfW, CUSHION_SIZE);
