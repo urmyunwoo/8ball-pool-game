@@ -68,10 +68,10 @@ export class Ball {
 export class Physics {
     constructor(hasPockets = true) {
         this.hasPockets = hasPockets;
-        this._left   = TABLE_X + BALL_RADIUS;
-        this._right  = TABLE_X + TABLE_W - BALL_RADIUS;
-        this._top    = TABLE_Y + BALL_RADIUS;
-        this._bottom = TABLE_Y + TABLE_H - BALL_RADIUS;
+        this._left   = TABLE_X + CUSHION_SIZE;
+        this._right  = TABLE_X + TABLE_W - CUSHION_SIZE;
+        this._top    = TABLE_Y + CUSHION_SIZE;
+        this._bottom = TABLE_Y + TABLE_H - CUSHION_SIZE;
         this.cushionHits = 0;
         this.ballContacts = new Set();
         this.collisionEvents = [];
@@ -287,10 +287,10 @@ export function castRay(cx, cy, angle, balls, maxLen = 800) {
 
     // Check wall intersections
     const walls = [
-        { x: TABLE_X + BALL_RADIUS, nx: 1, ny: 0 },     // left
-        { x: TABLE_X + TABLE_W - BALL_RADIUS, nx: -1, ny: 0 }, // right
-        { y: TABLE_Y + BALL_RADIUS, nx: 0, ny: 1 },     // top
-        { y: TABLE_Y + TABLE_H - BALL_RADIUS, nx: 0, ny: -1 }, // bottom
+        { x: TABLE_X + CUSHION_SIZE, nx: 1, ny: 0 },     // left
+        { x: TABLE_X + TABLE_W - CUSHION_SIZE, nx: -1, ny: 0 }, // right
+        { y: TABLE_Y + CUSHION_SIZE, nx: 0, ny: 1 },     // top
+        { y: TABLE_Y + TABLE_H - CUSHION_SIZE, nx: 0, ny: -1 }, // bottom
     ];
     for (const w of walls) {
         let t;
