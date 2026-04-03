@@ -46,18 +46,48 @@ function drawTableToCache() {
     }
     ctx.globalAlpha = 1.0;
 
-    // Cushions (darker border)
-    ctx.fillStyle = '#0f5a16';
+    // Cushions (실제 당구대 느낌 - 진한 녹색 + 고무 하이라이트)
+    const cPad = POCKET_RADIUS + 10;
+    const halfW = TABLE_W / 2 - POCKET_RADIUS * 2 - 10;
+    ctx.fillStyle = '#0a4a10';
     // top
-    ctx.fillRect(TABLE_X + POCKET_RADIUS + 10, TABLE_Y, TABLE_W / 2 - POCKET_RADIUS * 2 - 10, CUSHION_SIZE);
-    ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y, TABLE_W / 2 - POCKET_RADIUS * 2 - 10, CUSHION_SIZE);
+    ctx.fillRect(TABLE_X + cPad, TABLE_Y, halfW, CUSHION_SIZE);
+    ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y, halfW, CUSHION_SIZE);
     // bottom
-    ctx.fillRect(TABLE_X + POCKET_RADIUS + 10, TABLE_Y + TABLE_H - CUSHION_SIZE, TABLE_W / 2 - POCKET_RADIUS * 2 - 10, CUSHION_SIZE);
-    ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + TABLE_H - CUSHION_SIZE, TABLE_W / 2 - POCKET_RADIUS * 2 - 10, CUSHION_SIZE);
+    ctx.fillRect(TABLE_X + cPad, TABLE_Y + TABLE_H - CUSHION_SIZE, halfW, CUSHION_SIZE);
+    ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + TABLE_H - CUSHION_SIZE, halfW, CUSHION_SIZE);
     // left
-    ctx.fillRect(TABLE_X, TABLE_Y + POCKET_RADIUS + 10, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
+    ctx.fillRect(TABLE_X, TABLE_Y + cPad, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
     // right
-    ctx.fillRect(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + POCKET_RADIUS + 10, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
+    ctx.fillRect(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + cPad, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
+
+    // 고무 쿠션 안쪽 하이라이트 (공이 닿는 면)
+    ctx.strokeStyle = '#1a7a28';
+    ctx.lineWidth = 2;
+    // top inner edge
+    ctx.beginPath();
+    ctx.moveTo(TABLE_X + cPad, TABLE_Y + CUSHION_SIZE);
+    ctx.lineTo(TABLE_X + TABLE_W / 2 - POCKET_RADIUS, TABLE_Y + CUSHION_SIZE);
+    ctx.moveTo(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + CUSHION_SIZE);
+    ctx.lineTo(TABLE_X + TABLE_W - cPad, TABLE_Y + CUSHION_SIZE);
+    ctx.stroke();
+    // bottom inner edge
+    ctx.beginPath();
+    ctx.moveTo(TABLE_X + cPad, TABLE_Y + TABLE_H - CUSHION_SIZE);
+    ctx.lineTo(TABLE_X + TABLE_W / 2 - POCKET_RADIUS, TABLE_Y + TABLE_H - CUSHION_SIZE);
+    ctx.moveTo(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + TABLE_H - CUSHION_SIZE);
+    ctx.lineTo(TABLE_X + TABLE_W - cPad, TABLE_Y + TABLE_H - CUSHION_SIZE);
+    ctx.stroke();
+    // left inner edge
+    ctx.beginPath();
+    ctx.moveTo(TABLE_X + CUSHION_SIZE, TABLE_Y + cPad);
+    ctx.lineTo(TABLE_X + CUSHION_SIZE, TABLE_Y + TABLE_H - cPad);
+    ctx.stroke();
+    // right inner edge
+    ctx.beginPath();
+    ctx.moveTo(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + cPad);
+    ctx.lineTo(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + TABLE_H - cPad);
+    ctx.stroke();
 
     // Diamond markers on rails
     const diamonds = [];
