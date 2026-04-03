@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables (secrets)
+.env
+client/.env
+server/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Pygame
+*.wav
+
+# Token
+client/token.json
+
+# Build output
+client/build/
+
+# Hosting
+.netlify/
+.firebaserc

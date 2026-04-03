@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Ball Pool - 포켓볼 게임</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23165a1e'/><circle cx='16' cy='16' r='10' fill='%23f8f8f8'/></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: Arial, sans-serif;
+        }
+        #game {
+            position: absolute;
+            image-rendering: auto;
+            cursor: crosshair;
+        }
+        #loading {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: #0f0a08;
+            color: #dca828;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 100;
+        }
+        #loading .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid rgba(184,134,11,0.3);
+            border-top: 4px solid #dca828;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="spinner"></div>
+        8 Ball Pool 로딩 중...
+    </div>
+    <canvas id="game"></canvas>
+    <input id="hiddenInput" style="position:fixed;left:-9999px;top:-9999px;opacity:0;" autocomplete="off">
+    <script type="module">
+        import './js/main.js';
+        document.getElementById('loading').style.display = 'none';
+    </script>
+</body>
+</html>
