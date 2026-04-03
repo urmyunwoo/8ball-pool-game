@@ -28,11 +28,11 @@ export const POCKETS = [
 export const BALL_RADIUS = 16;
 
 // ── Physics ────────────────────────────────────────────
-export const FRICTION_DAMPING = 0.979;
-export const CUSHION_RESTITUTION = 0.83;
-export const BALL_RESTITUTION = 0.99;
-export const MIN_SPEED = 0.5;
-export const PHYSICS_SUBSTEPS = 12;
+export const FRICTION_DAMPING = 0.987;
+export const CUSHION_RESTITUTION = 0.88;
+export const BALL_RESTITUTION = 0.96;
+export const MIN_SPEED = 0.3;
+export const PHYSICS_SUBSTEPS = 16;
 
 // ── Shot ───────────────────────────────────────────────
 export const MAX_POWER = 1350.0;

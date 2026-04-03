@@ -83,19 +83,22 @@ export class Physics {
     }
 
     step(balls, dt) {
-        const subDt = dt / PHYSICS_SUBSTEPS;
+        // 고정 timestep: 속도는 픽셀/프레임(60fps) 기준이므로
+        // dt(초)를 60fps 프레임 수로 변환
+        const frames = dt * 60;
+        const totalSteps = PHYSICS_SUBSTEPS;
+        const subFrame = frames / totalSteps;
         const pocketed = [];
 
-        for (let s = 0; s < PHYSICS_SUBSTEPS; s++) {
+        for (let s = 0; s < totalSteps; s++) {
             for (const b of balls) {
                 if (b.pocketed) continue;
-                b.x += b.vx * subDt;
-                b.y += b.vy * subDt;
+                b.x += b.vx * subFrame;
+                b.y += b.vy * subFrame;
                 // update rotation for visual
-                const spd = b.speed;
-                if (spd > 0.1) {
-                    b.rotX += (b.vy / b.radius) * subDt * 2;
-                    b.rotY -= (b.vx / b.radius) * subDt * 2;
+                if (b.speed > 0.1) {
+                    b.rotX += (b.vy / b.radius) * subFrame * 2;
+                    b.rotY -= (b.vx / b.radius) * subFrame * 2;
                 }
             }
             this._wallCollisions(balls);
