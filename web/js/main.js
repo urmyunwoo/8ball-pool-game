@@ -341,8 +341,37 @@ scenes.game = (() => {
     // Leave button
     const LEAVE_BTN = { x: 15, y: WIN_H - 55, w: SIDEBAR_W - 30, h: 40 };
 
+    // Skip button (테이블 위 중앙)
+    const gameCx = SIDEBAR_W + (WIN_W - SIDEBAR_W) / 2;
+    const SKIP_BTN = { x: gameCx - 60, y: TABLE_Y - 60, w: 120, h: 34 };
+
     function getCueBall() { return balls.find(b => b.number === 0); }
     function isCarom() { return mode === '3cushion' || mode === '4ball'; }
+
+    function skipToEnd() {
+        // 물리 시뮬레이션을 최대 3000 스텝까지 돌려서 최종 위치로
+        const simDt = 1 / 60;
+        for (let i = 0; i < 3000; i++) {
+            physics.collisionEvents = [];
+            const pocketed = physics.step(balls, simDt);
+            for (const num of pocketed) {
+                if (!shotPocketed.includes(num)) shotPocketed.push(num);
+                if (num === 0) cuePocketed = true;
+            }
+            if (firstHitBall === null && physics.ballContacts.size > 0) {
+                for (const b of balls) {
+                    if (b.number !== 0 && physics.ballContacts.has(b.number)) {
+                        firstHitBall = b;
+                        break;
+                    }
+                }
+            }
+            if (!balls.some(b => b.isMoving)) break;
+        }
+        // 강제로 모든 공 정지
+        for (const b of balls) { b.vx = 0; b.vy = 0; }
+        recording = false;
+    }
 
     function initBalls() {
         balls = [];
@@ -427,11 +456,26 @@ scenes.game = (() => {
                 }
             }
 
-            // Replay skip
+            // Skip button (공 이동 중 / 리플레이 중)
+            if ((state === 'moving' || state === 'replay') && type === 'click') {
+                const sb = SKIP_BTN;
+                if (pos.x >= sb.x && pos.x <= sb.x + sb.w && pos.y >= sb.y && pos.y <= sb.y + sb.h) {
+                    playClick();
+                    if (state === 'replay') {
+                        replayFrames = [];
+                    }
+                    skipToEnd();
+                    processEndOfShot();
+                    return;
+                }
+            }
+
+            // Replay skip (spacebar)
             if (state === 'replay') {
                 if (type === 'keydown' && e.key === ' ') {
                     replayFrames = [];
-                    state = 'moving'; // will transition to processEnd
+                    skipToEnd();
+                    processEndOfShot();
                 }
                 return;
             }
@@ -699,6 +743,23 @@ scenes.game = (() => {
             // Replay overlay
             if (state === 'replay' && replayFrames.length > 0) {
                 drawReplayOverlay(ctx, replayTimer / replayFrames.length, replayElapsed);
+            }
+
+            // Skip button (공 이동 중 / 리플레이 중)
+            if (state === 'moving' || state === 'replay') {
+                const sb = SKIP_BTN;
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                roundRect(ctx, sb.x, sb.y, sb.w, sb.h, 8);
+                ctx.fill();
+                ctx.strokeStyle = C_GOLD_LIGHT;
+                ctx.lineWidth = 1;
+                roundRect(ctx, sb.x, sb.y, sb.w, sb.h, 8);
+                ctx.stroke();
+                ctx.fillStyle = C_GOLD_LIGHT;
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('⏩ 건너뛰기', sb.x + sb.w / 2, sb.y + sb.h / 2);
             }
 
             // Leave button
