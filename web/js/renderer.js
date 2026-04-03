@@ -46,20 +46,6 @@ function drawTableToCache() {
     }
     ctx.globalAlpha = 1.0;
 
-    // Cushions - 펠트와 자연스럽게 이어지는 쿠션
-    const cPad = POCKET_RADIUS + 10;
-    const halfW = TABLE_W / 2 - POCKET_RADIUS * 2 - 10;
-    ctx.fillStyle = C_FELT_DARK;
-    // top
-    ctx.fillRect(TABLE_X + cPad, TABLE_Y, halfW, CUSHION_SIZE);
-    ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y, halfW, CUSHION_SIZE);
-    // bottom
-    ctx.fillRect(TABLE_X + cPad, TABLE_Y + TABLE_H - CUSHION_SIZE, halfW, CUSHION_SIZE);
-    ctx.fillRect(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + TABLE_H - CUSHION_SIZE, halfW, CUSHION_SIZE);
-    // left
-    ctx.fillRect(TABLE_X, TABLE_Y + cPad, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
-    // right
-    ctx.fillRect(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + cPad, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
 
 
     // Diamond markers on rails
@@ -143,12 +129,6 @@ function drawPocketlessTable(ctx) {
     // Felt
     ctx.fillStyle = C_FELT;
     ctx.fillRect(TABLE_X, TABLE_Y, TABLE_W, TABLE_H);
-    // Cushion borders all around
-    ctx.fillStyle = '#0f5a16';
-    ctx.fillRect(TABLE_X, TABLE_Y, TABLE_W, CUSHION_SIZE);
-    ctx.fillRect(TABLE_X, TABLE_Y + TABLE_H - CUSHION_SIZE, TABLE_W, CUSHION_SIZE);
-    ctx.fillRect(TABLE_X, TABLE_Y, CUSHION_SIZE, TABLE_H);
-    ctx.fillRect(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y, CUSHION_SIZE, TABLE_H);
     // Diamonds
     ctx.fillStyle = C_GOLD;
     for (let i = 1; i < 4; i++) {
