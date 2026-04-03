@@ -247,7 +247,7 @@ export class Physics {
             for (const [px, py] of POCKETS) {
                 const dx = b.x - px;
                 const dy = b.y - py;
-                if (Math.sqrt(dx * dx + dy * dy) < POCKET_RADIUS + b.radius * 0.5) {
+                if (Math.sqrt(dx * dx + dy * dy) < POCKET_RADIUS + b.radius * 0.75) {
                     b.pocketed = true;
                     b.pocketPos = [px, py];
                     b.vx = 0; b.vy = 0;
