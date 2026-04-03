@@ -61,33 +61,6 @@ function drawTableToCache() {
     // right
     ctx.fillRect(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + cPad, CUSHION_SIZE, TABLE_H - POCKET_RADIUS * 2 - 20);
 
-    // 고무 쿠션 안쪽 하이라이트 (공이 닿는 면)
-    ctx.strokeStyle = '#1a7a28';
-    ctx.lineWidth = 2;
-    // top inner edge
-    ctx.beginPath();
-    ctx.moveTo(TABLE_X + cPad, TABLE_Y + CUSHION_SIZE);
-    ctx.lineTo(TABLE_X + TABLE_W / 2 - POCKET_RADIUS, TABLE_Y + CUSHION_SIZE);
-    ctx.moveTo(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + CUSHION_SIZE);
-    ctx.lineTo(TABLE_X + TABLE_W - cPad, TABLE_Y + CUSHION_SIZE);
-    ctx.stroke();
-    // bottom inner edge
-    ctx.beginPath();
-    ctx.moveTo(TABLE_X + cPad, TABLE_Y + TABLE_H - CUSHION_SIZE);
-    ctx.lineTo(TABLE_X + TABLE_W / 2 - POCKET_RADIUS, TABLE_Y + TABLE_H - CUSHION_SIZE);
-    ctx.moveTo(TABLE_X + TABLE_W / 2 + POCKET_RADIUS + 10, TABLE_Y + TABLE_H - CUSHION_SIZE);
-    ctx.lineTo(TABLE_X + TABLE_W - cPad, TABLE_Y + TABLE_H - CUSHION_SIZE);
-    ctx.stroke();
-    // left inner edge
-    ctx.beginPath();
-    ctx.moveTo(TABLE_X + CUSHION_SIZE, TABLE_Y + cPad);
-    ctx.lineTo(TABLE_X + CUSHION_SIZE, TABLE_Y + TABLE_H - cPad);
-    ctx.stroke();
-    // right inner edge
-    ctx.beginPath();
-    ctx.moveTo(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + cPad);
-    ctx.lineTo(TABLE_X + TABLE_W - CUSHION_SIZE, TABLE_Y + TABLE_H - cPad);
-    ctx.stroke();
 
     // Diamond markers on rails
     const diamonds = [];
