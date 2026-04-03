@@ -28,15 +28,15 @@ export const POCKETS = [
 export const BALL_RADIUS = 16;
 
 // ── Physics ────────────────────────────────────────────
-export const FRICTION_DAMPING = 0.987;
-export const CUSHION_RESTITUTION = 0.88;
-export const BALL_RESTITUTION = 0.96;
+export const FRICTION_DAMPING = 0.984;
+export const CUSHION_RESTITUTION = 0.85;
+export const BALL_RESTITUTION = 0.95;
 export const MIN_SPEED = 0.3;
 export const PHYSICS_SUBSTEPS = 16;
 
 // ── Shot ───────────────────────────────────────────────
-export const MAX_POWER = 1350.0;
-export const POWER_SCALE = 0.35;
+export const MAX_POWER = 900.0;
+export const POWER_SCALE = 0.30;
 
 // ── Colors ─────────────────────────────────────────────
 export const C_BG         = '#0f0a08';
